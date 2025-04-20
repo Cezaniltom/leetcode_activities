@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="content">
+    <button id="startTyping">Começar a digitar</button>
+    <p>
+        <div id="typewriter"></div>
+    </p>
+
+    <script>
+        const typewriter = document.getElementById('typewriter');
+        let index = 0;
+
+        document
+            .getElementById('startTyping')
+            .addEventListener('click', function() {
+                const text = document.getElementById('content').value;
+                typewriter.textContent = '';
+                index = 0;
+                const typeInterval = setInterval(() => {
+                    typewriter.textContent += text.charAt(index);
+                    index++;
+                    if (index > text.length) {
+                        clearInterval(typeInterval);
+                    }
+                }, 150);
+            })
+    </script>
+</body>
+</html>
+
+<!-- 1. Seleção de elemento do DOM
+js
+Copiar
+Editar
+const typewriter = document.getElementById('typewriter');
+Essa linha pega um elemento HTML com o id="typewriter" e armazena na variável typewriter. Esse será o local onde o texto será exibido com o efeito "máquina de escrever".
+
+2. Inicialização de variável
+js
+Copiar
+Editar
+let index = 0;
+Essa linha define uma variável index, iniciando com valor 0. Ela será usada para controlar qual caractere do texto deve ser exibido a cada passo da animação.
+
+3. Adicionando ouvinte de evento a um botão
+js
+Copiar
+Editar
+document
+    .getElementById('startTyping')
+    .addEventListener('click', function() {
+        ...
+    });
+Aqui, o código seleciona um elemento HTML com id="startTyping" — provavelmente um botão — e adiciona um ouvinte de evento (event listener) que escuta o clique do usuário. Quando o botão for clicado, a função dentro do addEventListener será executada.
+
+4. Função executada ao clicar no botão
+Dentro da função do click, o que acontece:
+
+a. Pega o conteúdo a ser digitado
+js
+Copiar
+Editar
+const text = document.getElementById('content').value;
+Essa linha pega o valor de um campo de entrada (<input> ou <textarea>) com o id="content" — ou seja, o texto que o usuário digitou — e armazena na variável text.
+
+b. Limpa o conteúdo atual da área de digitação
+js
+Copiar
+Editar
+typewriter.textContent = '';
+Aqui, a área onde o texto vai aparecer (o elemento com id="typewriter") é limpa antes de começar a digitação.
+
+c. Reinicia o índice
+js
+Copiar
+Editar
+index = 0;
+Reinicia o índice para garantir que a digitação comece do início do texto.
+
+d. Cria o efeito de "máquina de escrever"
+js
+Copiar
+Editar
+const typeInterval = setInterval(() => {
+    typewriter.textContent += text.charAt(index);
+    index++;
+    if (index > text.length) {
+        clearInterval(typeInterval);
+    }
+}, 150);
+Vamos por partes:
+
+setInterval(..., 150) executa a função dentro dele a cada 150 milissegundos.
+
+text.charAt(index) pega o caractere correspondente à posição atual (index) da string digitada.
+
+typewriter.textContent += ... adiciona esse caractere ao texto visível na tela.
+
+index++ incrementa o índice para passar ao próximo caractere.
+
+Quando index ultrapassa o tamanho da string (index > text.length), a função clearInterval(typeInterval) é chamada para parar o intervalo, encerrando a animação.
+
+✅ Resumo geral:
+Esse código implementa um efeito de máquina de escrever. Quando o usuário clica no botão com id="startTyping", o texto digitado no campo com id="content" é exibido letra por letra no elemento com id="typewriter", com um pequeno atraso entre cada letra (150ms), simulando uma digitação. -->
